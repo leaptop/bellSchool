@@ -10,12 +10,21 @@ public class GooglePageBeforeSearch {
     protected WebElement searchField;
     protected WebElement searchButton;
 
-    public GooglePageBeforeSearch(WebDriver chromedriver){//constructor gets a browser fo work
+    /** Constructor gets a browser for work
+     *
+     * @param chromedriver getting a driver to use a web browser and search for web elements on it.
+     * Interesting behavior is: in before search page there is input tag, and in after search
+     * page the input is button tag. So I had to use an asterisk
+     */
+    public GooglePageBeforeSearch(WebDriver chromedriver){
         this.chromedriver = chromedriver;
         this.searchField = chromedriver.findElement(By.xpath("//input[@role='combobox' and @name='q']"));
-        this.searchButton = chromedriver.findElement(By.xpath("//*[@type='submit' and @aria-label='Поиск в Google']"));//interesting behavior is: in before search page there is input tag, abd in after search page the input is button tag. So I had to use an asterisk
-    }
+        this.searchButton = chromedriver.findElement(By.xpath("//*[@type='submit' and @aria-label='Поиск в Google']"));    }
 
+    /**
+     * Uses found on a page searchField and searchButton to insert the keys to find
+     * @param keysFind a string to find, using our search web elements
+     */
     public void find(String keysFind){
         searchField.click();
         searchField.sendKeys(keysFind);

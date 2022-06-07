@@ -16,8 +16,10 @@ public class PageFactoryOpenRu {
 
     @FindBy(how = How.PARTIAL_LINK_TEXT, partialLinkText = "www.open.ru")
     WebElement linkOfFoundSite;
-
-    @FindBy(how = How.XPATH, xpath = "//input[@role='combobox' and @name='q']")//assigned searchfield via annotation
+    /**
+     * Assigned searchfield via annotation.
+     */
+    @FindBy(how = How.XPATH, xpath = "//input[@role='combobox' and @name='q']")
     WebElement searchField;
 
     @FindBy(how = How.XPATH, xpath = "//*[@type='submit' and @aria-label='Поиск в Google']")
@@ -42,6 +44,9 @@ public class PageFactoryOpenRu {
         this.chromeDriver=chromeDriver;
     }
 
+    /**
+     * @return a web element with the information about the price of buying US dollars for our bank (open.ru)
+     */
     public WebElement getBankBuysUSD() {
         return bankBuysUSD;
     }

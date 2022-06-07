@@ -11,15 +11,20 @@ import pages.PageFactoryOpenRu;
 import java.util.ArrayList;
 
 public class Tests extends BaseTest {
+    /**
+     * Checks if google gives "https://www.open.ru" after searching "Открытие".
+     * Checks if prices to buy are less, than prices to sell
+     * Ctrl + click opens a link in a new tab
+     */
     @Feature("Проверка результатов поиска")
     @Test
-    public void test_1_2_a_withPageFactory(){//checks if google gives "https://www.open.ru" after searching "Открытие"
+    public void test_1_2_a_withPageFactory(){
         chromeDriver.get("https://www.google.com/search");
         PageFactoryOpenRu pageFactoryOpenRu = PageFactory.initElements(chromeDriver, PageFactoryOpenRu.class);//important: invoke selenium's PageFactory
         pageFactoryOpenRu.find("Открытие");
         Assertions.assertTrue(pageFactoryOpenRu.getResults().stream().anyMatch(x -> x.getText().contains("https://www.open.ru")));
 
-        String n = Keys.chord(Keys.CONTROL, Keys.ENTER);//Ctrl + click opens a link in a new tab
+        String n = Keys.chord(Keys.CONTROL, Keys.ENTER);
         pageFactoryOpenRu.getLinkOfFoundSite().sendKeys(n);
 
         ArrayList<String> newTab = new ArrayList<>(chromeDriver.getWindowHandles());
@@ -29,7 +34,7 @@ public class Tests extends BaseTest {
         double bsu = Double.parseDouble(pageFactoryOpenRu.getBankSellsUSD().getText().replace(',','.') );
         double bbe = Double.parseDouble(pageFactoryOpenRu.getBankBuysEUR().getText().replace(',','.') );
         double bse = Double.parseDouble(pageFactoryOpenRu.getBankSellsEUR().getText().replace(',','.') );
-        Assertions.assertTrue(bbu<bsu);//checks if prices to buy are less, than prices to sell
+        Assertions.assertTrue(bbu<bsu);
         Assertions.assertTrue(bbe<bse);
     }
 }

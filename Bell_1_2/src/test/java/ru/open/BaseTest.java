@@ -7,11 +7,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-//good practise is to keep  output from hooks in a class named BaseTest
-public class BaseTest {//this class opens and closes web browser for testing(and does some other things)
-
+/** Good practise is to keep  output from hooks in a class named BaseTest.
+ * This class opens and closes web browser for testing(and does some other things)
+ */
+public class BaseTest {
     protected WebDriver chromeDriver;
-
     @BeforeEach
     public void before() {
         System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_DRIVER"));
@@ -27,3 +27,20 @@ public class BaseTest {//this class opens and closes web browser for testing(and
         chromeDriver.quit();
     }
 }
+/**
+ *Задание 1.2
+ * Задача:
+ * 5.	запустить Chrome
+ * 6.	открыть https://www.google.com/
+ * 7.	написать в строке поиска «Открытие»
+ * 8.	нажать Поиск
+ * 9.	проверить, что результатах поиска есть https://www.open.ru
+ * 10.	перейти на сайт https://www.open.ru
+ * 11.	проверить в блоке «Курс обмена в интернет-банке», что курс продажи больше курса покупки, для USD и для EUR.
+ * Автотест необходимо написать, используя данный стек:
+ * Java, JUnit Jupiter, Selenium, PageFactory
+ *
+ * Изучить самостоятельно:
+ * - как переключаться между вкладками браузера
+ * - почитать про xpath, попрактиковаться
+ */
