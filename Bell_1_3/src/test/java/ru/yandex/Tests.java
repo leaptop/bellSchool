@@ -3,9 +3,6 @@ package ru.yandex;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import pages.YandexMarketPO;
 import pages.YandexRuPO;
 
@@ -34,9 +31,11 @@ public class Tests extends BaseTest {
        // yandexMarketPO.getPriceSpanFrom().click();
       //  String sringForLowerPrice = Keys.chord("10000");
 
-        yandexMarketPO.sendPriceToSpan("10000");
+        yandexMarketPO.sendPricesToSpans(10000, 90000);
 
-
+        yandexMarketPO.getShowAllManufacturersButton();
+        yandexMarketPO. dounbleClickOnManufacturer();
+        //yandexMarketPO.getShowAllManufacturersButton().sendKeys();
 
         //yandexMarketPO.getPriceSpanFrom().sendKeys("10000");
         //yandexMarketPO.getPriceSpanFrom().sendKeys("10000");

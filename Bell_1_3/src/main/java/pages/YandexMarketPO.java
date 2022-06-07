@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -14,17 +15,26 @@ public class YandexMarketPO {
     }
 
     WebElement priceSpanFrom;
+    WebElement priceSpanTo;
+    WebElement showAllManufacturersButton;
 
-    public void sendPriceToSpan(String str){
+    public WebElement getShowAllManufacturersButton(){
+        return showAllManufacturersButton = chromedriver.findElement(By.xpath("//span[text()=\"Производитель\"]"));
+    }
+
+    public void dounbleClickOnManufacturer(){
+        Actions builder = new Actions(chromedriver);
+
+        builder.doubleClick(showAllManufacturersButton).perform();
+    }
+    public void sendPricesToSpans(int from, int to){
         Actions builder = new Actions(chromedriver);
         Action seriesOfActions = builder
                 .moveToElement(priceSpanFrom)
-                .click()
-                // .keyDown(txtUsername, Keys.SHIFT)
-                .sendKeys(priceSpanFrom, str)
-                // .keyUp(txtUsername, Keys.SHIFT)
-                //  .doubleClick(txtUsername)
-                // .contextClick()
+                .sendKeys(priceSpanFrom, Integer.toString(from))
+                .sendKeys(Keys.TAB)
+                .sendKeys(Integer.toString(to))
+              //  .sendKeys(Keys.ENTER)
                 .build();
 
         seriesOfActions.perform() ;
