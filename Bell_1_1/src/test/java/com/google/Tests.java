@@ -26,3 +26,4 @@ public class Tests extends BaseTest{
                 "На первой странице результатов поиска '" + keywords + "' не найдено '" + result+"'\n");
     }
 }
+

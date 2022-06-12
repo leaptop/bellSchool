@@ -58,6 +58,14 @@ public class WebDriverWaits {
         return true;
     }
 
+    /**
+     * Здесь меняется время ожидания для простой штуки, для которой, видимо, много времени не надо.
+     * Здесь Thread.sleep используется не в одиночку, а для вызова проверки  isVisible(element),
+     * поэтому Thread.sleep использовать можно.
+     * @param element
+     * @return
+     *
+     */
     public static boolean isElementNotExist(WebElement element) {
         int timer = 0;
         WebDriverManager.getCurrentDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -70,7 +78,7 @@ public class WebDriverWaits {
                 }
                 timer++;
             }
-            return false;
+            return false;//Такой возврат значит, что элемент существует.
         } catch (NoSuchElementException|StaleElementReferenceException e) {
             return true;
         } finally {
@@ -78,6 +86,12 @@ public class WebDriverWaits {
         }
     }
 
+    /**
+     * Здесь driver можно не вызывать, вроде потомучто это так задумано.
+     * @param element
+     * @param attribute
+     * @param value
+     */
     public static void waitUntilAttributeWillBe(WebElement element, String attribute, String value) {
         new WebDriverWait(WebDriverManager.getCurrentDriver(), Constants.DEFAULT_TIMEOUT)
                 .until((ExpectedCondition<Boolean>) driver -> element.getAttribute(attribute).contains(value));
