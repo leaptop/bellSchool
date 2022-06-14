@@ -70,6 +70,12 @@ public class YandexMarketPO {
 
     }
 
+    /**
+     *  ПОЧЕМУ НЕ ВСЕГДА ВСТАВЛЯЕТСЯ ЦЕНА? ВЕДЬ ИСПОЛЬЗУЮ ОЖИДАНИЯ...
+     * @param from
+     * @param to
+     * @throws InterruptedException
+     */
     public void sendPricesToSpansWithWaiting(int from, int to) throws InterruptedException {
         //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(priceSpanFromXpathLocator)));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(priceSpanFromXpathLocator)));
