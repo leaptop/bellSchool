@@ -2,13 +2,14 @@ package com.google;
 
 import driver.Waits;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pages.GoogleBeforeSearchPageObject;
 import pages.GooglePageAfterSearch;
-//import org.junit.jupiter.engine.
+
+import java.util.List;
 
 public class TaskGladiolus extends BaseTest {
 
@@ -31,16 +32,15 @@ public class TaskGladiolus extends BaseTest {
     public void checkIfGladiolusWikiExists(String keywords, String result) throws InterruptedException {
         chromedriver.get("https://google.com/");
         GoogleBeforeSearchPageObject gbspo = new GoogleBeforeSearchPageObject(chromedriver);
-        Waits.waitElementPresents(gbspo.inputForSearchLocator);
-        System.out.println("3");
-        Thread.sleep(2500000);
+        Waits.waitElementPresents(gbspo.inputForSearch_Locator);
         gbspo.inputForSearchWebElement = chromedriver.findElement(
-                By.xpath(gbspo.inputForSearchLocator));
+                By.xpath(gbspo.inputForSearch_Locator));
         gbspo.insertTextIntoSearchFieldAndPressEnter("Гладиолус");
         GooglePageAfterSearch gpas = new GooglePageAfterSearch(chromedriver);
+        List<WebElement> lt = gpas.getResults();
+        //System.out.println("lt.size = " + lt.size()); for (int i = 0; i < lt.size(); i++) {System.out.println("lt.get(i).getAttribute(\"href\") = " + lt.get(i).getAttribute("href"));}
         Assertions.assertTrue((
-                        (gpas.getResults().stream().anyMatch(x -> x.getText().contains(result)))
-                                || (gpas.getAdditionalResults().stream().anyMatch(x -> x.getAttribute("href").contains(result)))
+                        (lt.stream().anyMatch(x -> x.getAttribute("href").contains(result)))
                 ),
                 "На первой странице результатов поиска '" + keywords + "' не найдено '" + result + "'\n");
     }

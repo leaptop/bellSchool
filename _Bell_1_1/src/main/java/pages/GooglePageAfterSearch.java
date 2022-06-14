@@ -30,7 +30,11 @@ public class GooglePageAfterSearch extends GoogleBeforeSearchPageObject {
      * результатов поиска в один список, а потом в нём искать нужную ссылку.
      */
     public String resultsGeneral_Locator = "//cite[@role=\"text\"]";
+    /**
+     *
+     */
     public  String resultsGenearlA_Based_Locator =
+            "//div[starts-with(@class,\"g \") or (@class='g')]//a[contains(@href,'http')]";
     public String resultsTemp_Locator;
     /**
      * Видимо, недпустимо использовать такой локатор, т.к. на странице результатов поиска может быть
@@ -41,12 +45,12 @@ public class GooglePageAfterSearch extends GoogleBeforeSearchPageObject {
     private List<WebElement> results;
 
     /**
-     * Нужно поменять так, чтобы хранились ссылки( вебелементы, основанные на теге "а").
+     * Добавляем в список ссылки из основго и дополнительного результатов поиска.
      * @return
      */
     public List<WebElement> getResults() {
-        results = chromedriver.findElements(By.xpath(resultsGeneral_Locator));
-        //results.addAll(chromedriver.findElements(By.xpath(eachRefInAdditionalResultsWithHREF_HTTP_Locator)));
+        results = chromedriver.findElements(By.xpath(resultsGenearlA_Based_Locator));
+        results.addAll(chromedriver.findElements(By.xpath(eachRefInAdditionalResultsWithHREF_HTTP_Locator)));
         return results;
     }
 

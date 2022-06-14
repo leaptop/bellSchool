@@ -13,19 +13,19 @@ public class GoogleBeforeSearchPageObject {
 
     public WebDriver chromedriver;
     public WebElement inputForSearchWebElement;
-    public String inputForSearchLocator = "//input[@title='Поиск']";
+    /**
+     * Локатор для поиска элемента для ввода текста.
+     */
+    public String inputForSearch_Locator = "//input[@title='Search' or @title='Поиск']";
 
-    public void initializePage() {
-        // Waits/// нет. Похоже это не нужно, т.к. элементы могут перезагрузиться...
-    }
-
+    /**
+     * Вводит текст и жмёт Enter. Не могу понять, нужно здесь ожидание ли нет.
+     * @param textForSearch
+     */
     public void insertTextIntoSearchFieldAndPressEnter(String textForSearch) {
-        Waits.waitElementPresents(inputForSearchLocator);
-        inputForSearchWebElement = chromedriver.findElement(By.xpath(inputForSearchLocator));
-
-        inputForSearchWebElement.sendKeys(textForSearch);
-       // Waits.waitUntilElementTextContains(inputForSearchWebElement, textForSearch);
-        inputForSearchWebElement.sendKeys(Keys.ENTER);
+        Waits.waitElementPresents(inputForSearch_Locator);
+        inputForSearchWebElement = chromedriver.findElement(By.xpath(inputForSearch_Locator));
+        inputForSearchWebElement.sendKeys(textForSearch + Keys.ENTER);
     }
 
 }
