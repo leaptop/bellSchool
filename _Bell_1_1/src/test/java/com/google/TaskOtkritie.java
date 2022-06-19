@@ -26,7 +26,7 @@ public class TaskOtkritie extends BaseTest {
      * Автотест необходимо написать, используя данный стек:
      * Java, JUnit Jupiter, Selenium, PageFactory
      */
-    @Feature("Проверка результатов поиска")
+    @Feature("Проверка результатов поиска, проверка цен на валюту")
     @Test
     public void checkIfOpenRuCanBeFoundInGoogle() throws InterruptedException {
         chromedriver.get("https://www.google.com/search");

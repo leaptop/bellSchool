@@ -97,7 +97,7 @@ public class BankOtkritiePageFactory {
     }
 
     /**
-     * Проверяем, что цена покупки валюты ниже цены продажи. 
+     * Проверяем, что цена покупки валюты ниже цены продажи.
      * @return true если покупка меньше продажи.
      */
     public boolean checkIfBuyIsLessThanSell() {
