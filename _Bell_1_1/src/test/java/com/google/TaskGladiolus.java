@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.GoogleBeforeSearchPageObject;
-import pages.GooglePageAfterSearch;
+import pages.GooglePageAfterSearchPageObject;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class TaskGladiolus extends BaseTest {
         gbspo.inputForSearchWebElement = chromedriver.findElement(
                 By.xpath(gbspo.inputForSearch_Locator));
         gbspo.insertTextIntoSearchFieldAndPressEnter("Гладиолус");
-        GooglePageAfterSearch gpas = new GooglePageAfterSearch(chromedriver);
+        GooglePageAfterSearchPageObject gpas = new GooglePageAfterSearchPageObject(chromedriver);
         List<WebElement> lt = gpas.getResults();
         //System.out.println("lt.size = " + lt.size()); for (int i = 0; i < lt.size(); i++) {System.out.println("lt.get(i).getAttribute(\"href\") = " + lt.get(i).getAttribute("href"));}
         Assertions.assertTrue((

@@ -13,8 +13,9 @@ public class BaseTest {
         Manager.initChrome();
         chromedriver = Manager.getCurrentDriver();
     }
-   // @AfterEach
-    public void afterEach(){
+  //  @AfterEach
+    public void afterEach()throws InterruptedException{
+        Thread.sleep(500000);
         Manager.killCurrentDriver();
     }
 }

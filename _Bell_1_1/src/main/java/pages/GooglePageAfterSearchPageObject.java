@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class GooglePageAfterSearch extends GoogleBeforeSearchPageObject {
-    public GooglePageAfterSearch(WebDriver wd) {
+public class GooglePageAfterSearchPageObject extends GoogleBeforeSearchPageObject {
+    public GooglePageAfterSearchPageObject(WebDriver wd) {
         super(wd);
     }
 

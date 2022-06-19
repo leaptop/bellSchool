@@ -16,7 +16,10 @@
         <qameta.allure>2.13.6</qameta.allure>
         <allure.version>2.13.0</allure.version>
         <aspectj.version>1.9.4</aspectj.version>
+        <encoding.type>UTF-8</encoding.type>
     </properties>
+
+
 
     <dependencies>
         <!--Для скринов-->
@@ -73,6 +76,7 @@
     </dependencies> <!-- Здесь библиотеки -->
 
     <build>  <!-- А здесь плагины и настройки компилятора -->
+
         <plugins>
             <plugin>
                 <groupId>io.qameta.allure</groupId>

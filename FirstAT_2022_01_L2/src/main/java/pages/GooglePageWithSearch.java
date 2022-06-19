@@ -34,7 +34,7 @@ public class GooglePageWithSearch {
 
     public List<Map<String, Object>> getCollectResults() {//Заполняем нашу коллекцию. Это чтобы удобно было обращаться с результатами поиска.
         for(WebElement result : searchItems){
-            collectResults.add(Map.of(
+            collectResults.add(Map.of(//Каждый раз добавляется новая мапа с конечным числом пар(4 штуки)
                     "WEB_ELEMENT", result,
                     "URL", result.findElement(By.xpath(selectorURL)),
                     "NAME_PAGE", result.findElement(By.xpath(selectorNamePage)).getText(),
