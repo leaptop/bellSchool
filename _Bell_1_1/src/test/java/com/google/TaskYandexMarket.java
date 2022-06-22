@@ -2,7 +2,7 @@ package com.google;
 
 import driver.Waits;
 import helpers.Actions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
@@ -41,8 +41,8 @@ public class TaskYandexMarket extends BaseTest {
      * -	Помните про универсальные методы. Старайтесь писать код, полезный в других тестах, полезный коллегам. Не будьте эгоистами!
      */
     @ParameterizedTest(name = "{displayName} {arguments}")
-    @CsvSource("10000, 90000")
-    public void checkYM(String min, String max) {
+    @CsvSource("10000, 90000, HP, Lenovo")
+    public void checkYM(String min, String max, String manufacturer1, String manufacturer2) throws InterruptedException {
         chromedriver.get("https://yandex.ru/");
         YandexMarketPO ympo = new YandexMarketPO(chromedriver);
         chromedriver.findElement(By.xpath(ympo.yandexMarket_locator)).click();
@@ -54,16 +54,40 @@ public class TaskYandexMarket extends BaseTest {
         Actions.hover.accept(By.xpath(ympo.categorySelectorNotebooks));
         Waits.waitElementPresents(ympo.categorySelectorNotebooks);
         chromedriver.findElement(By.xpath(ympo.categorySelectorNotebooks)).click();
-        YandexMarketNotebooksPO ymn = new YandexMarketNotebooksPO();
+        YandexMarketNotebooksPO ymn = new YandexMarketNotebooksPO(chromedriver);
         Waits.waitUntilElementBeClickable(chromedriver.findElement(By.xpath(ymn.textFieldPriceMin)));
         WebElement minWE = chromedriver.findElement(By.xpath(ymn.textFieldPriceMin));
         WebElement maxWE = chromedriver.findElement(By.xpath(ymn.textFieldPriceMax));
+
         minWE.sendKeys(min);
         maxWE.sendKeys(max);
-        Waits.waitUntilElementTextContainsByLocator(By.xpath(ymn.textFieldPriceMin), min);
-        Waits.waitUntilElementTextContainsByLocator(By.xpath(ymn.textFieldPriceMax), max);
+        Waits.waitUntilAttributeWillBe(minWE, "value", min);
+        Waits.waitUntilAttributeWillBe(maxWE, "value", max);
+        chromedriver.findElement(By.xpath(ymn.showAllManufacturersButton)).click();
+        Waits.waitUntilElementBeClickable(chromedriver.findElement
+                (By.xpath(ymn.getComboBoxManufacturer_locator(manufacturer1))));
+        WebElement manuWE1 = chromedriver.findElement
+                (By.xpath(ymn.getComboBoxManufacturer_locator(manufacturer1)));
+        Waits.waitUntilElementBeClickable(chromedriver.findElement
+                (By.xpath(ymn.getComboBoxManufacturer_locator(manufacturer2))));
+        WebElement manuWE2 = chromedriver.findElement
+                (By.xpath(ymn.getComboBoxManufacturer_locator(manufacturer2)));
+        // System.out.println("Время пошло");
+        //Thread.sleep(10000);
+        manuWE1.click();
+        manuWE2.click();
 
-
+        Waits.waitElementPresents(ymn.theSeventhSearchResult);
+        Waits.waitUntilElementNotExistByXpath(ymn.upperRotatingProgressBar);
+        String text1 = ymn.getTitleAttributeOfLinkOfResultNumber(0);
+        chromedriver.findElement(By.xpath(ymn.searchField_locator)).sendKeys(text1);
+        chromedriver.findElement(By.xpath(ymn.searchButton_locator)).click();
+        Waits.waitElementPresents(ymn.getLinkTextOfSearchResult(0));
+       // Thread.sleep(10000);
+        String text2 = ymn.getTitleAttributeOfLinkOfResultNumber(0);
+        System.out.println("text1: " + text1);
+        System.out.println("text2: " + text2);
+        Assertions.assertTrue(text1.equals(text2));
 
     }
 }
